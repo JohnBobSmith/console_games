@@ -29,7 +29,7 @@ class Game
 		//Returns false if there is an overlap. The space is invalid.
 		//Does NOT check for input sanity or bounds!!! This is done
 		//in some other class, likely going to be the player class.
-		bool is_valid_space(int xPosition, int yPosition, char piece);
+		bool is_valid_space(int xPosition, int yPosition);
 	
 		//Check for every possible win using piece as the winning piece.
 		//For example, check if O is the winning piece.
@@ -41,7 +41,7 @@ class Game
 		//the risk of accidently trashing it. is_valid_space() should always
 		//be called first, and it likely will be called in this function.
 		//Returns false if it cannot place the piece.
-		bool place_new_piece(int xPosition, int yPosition, char piece);
+		bool add_new_piece(int xPosition, int yPosition, char piece);
 	
 		//Removes all pieces from the board, re-sets the score (if I chose to 
 		//implement scoring) to zero. This is used in preperation for a new game.

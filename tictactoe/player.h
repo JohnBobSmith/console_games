@@ -8,9 +8,6 @@ class Player
 		Player();
 		~Player();
 		
-		//Make a move as the player.
-		int make_move(int xPosition, int yPosition, char piece); 
-		
 		//Get user input, no sanitation/validation.
 		//This function does call a sanitation function,
 		//but there is still no 100% guaruntee that the result

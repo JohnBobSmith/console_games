@@ -13,12 +13,6 @@ Player::~Player()
 	//dtor
 }
 
-int Player::make_move(int xPosition, int yPosition, char piece)
-{
-	Game game;
-	game.place_new_piece(xPosition, yPosition, piece);
-}
-
 int Player::get_input()
 {
 	static int failCount = 3;//Retry but not indefinitely.

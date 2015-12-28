@@ -28,33 +28,24 @@ void Game::print_board()
 									//Call it vertical padding I guess.
 }
 
-bool Game::is_valid_space(int xPosition, int yPosition, char piece)
+bool Game::is_valid_space(int xPosition, int yPosition)
 {
-	if (board[xPosition][yPosition] == piece) {
-		return false; //Invalid location
-	} else {
-		return true;
+	if (board[xPosition][yPosition] != pieceNeutral) {
+		return false; //Piece is not neutral therefore occupied.
 	}
+	return true; //All clear. Neutral piece is a green light.
 }
 
-bool Game::is_victory(char piece)
-{
-	if (is_win_horizontal(piece) || is_win_vertical(piece) || is_win_diagonal(piece)) {
-		return true; //"piece" won in some way
-	} else {
-		return false;
-	}
-}
 
-bool Game::place_new_piece(int xPosition, int yPosition, char piece)
+bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 {
-	if (is_valid_space(xPosition, yPosition, piece)) {
+	if (is_valid_space(xPosition, yPosition)) {
 		board[xPosition][yPosition] = piece; //All clear, place piece
+		return true;
 	} else {
-		std::cout << "Error: Overlap on " << xPosition << " " << yPosition << ". No piece placed.";
-		return false; //Cannot place the piece
+		std::cout << "Error: Overlap on " << xPosition << ":" << yPosition << "...\n";
 	}
-	return true; //To avoid false returns (no pun intended)
+	return false; //Cannot place the piece
 }
 
 void Game::reset()
@@ -65,6 +56,14 @@ void Game::reset()
 			board[row][col] = pieceNeutral;
 		}
 	}
+}
+
+bool Game::is_victory(char piece)
+{
+	if (is_win_horizontal(piece) || is_win_vertical(piece) || is_win_diagonal(piece)) {
+		return true; //"piece" won in some way
+	}
+	return false;
 }
 
 //Our three private win-checking functions. I hope thats self explanatory.
