@@ -8,6 +8,11 @@ class Player
 		Player();
 		~Player();
 		
+		//The previous player piece system was a bit of a fail.
+		//Now opting for a public player piece, which gets assigned
+		//The non-neutral value from main and the users input.
+		char playerPiece;
+		
 		//Get user input, no sanitation/validation.
 		//This function does call a sanitation function,
 		//but there is still no 100% guaruntee that the result
@@ -20,15 +25,6 @@ class Player
 		//sanitization chemicals... Returns true if good input,
 		//false otherwise. 
 		bool sanitize_input(int input);
-		
-		//Assign an X or an O to playerPiece. Avoid completely
-		//hardcoding which piece the player is.
-		int set_player_piece(char piece) { playerPiece = piece; }
-		char get_player_piece() { return playerPiece; }
-				
-		private:
-			char playerPiece = '-'; //The piece unique to the player
-			//this ^ starts with a neutral piece.
 };
 
 #endif
