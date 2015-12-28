@@ -55,7 +55,7 @@ bool Player::sanitize_input(int input)
 		return true; //9 is valid input for an exit.
 	}
 	
-	if (std::cin.fail() || input < 0 || input > game.get_max_rows()) {
+	if (std::cin.fail() || input < 0 || input >= game.get_max_rows()) {
 		return false; //Failed input
 	} 
 	return true; //No failure detected, so input is valid.
