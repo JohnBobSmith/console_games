@@ -21,6 +21,12 @@ int main()
 		userInput[0] = player.get_input();
 		userInput[1] = player.get_input();
 		
+		if (userInput[0] == -1 || userInput[1] == -1) {
+			game.isRunning = false;
+			return -1; //My input validtaor had only one job...
+			//And he still has it. You, user, you're fired!
+		}
+		
 		if (userInput[0] == 9 || userInput[1] == 9) {
 			//Valid user exit.
 			std::cout << "\n\nUser exit requested. Goodbye!";

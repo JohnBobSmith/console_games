@@ -16,6 +16,8 @@ Player::~Player()
 
 int Player::get_input()
 {
+	//For convserion of a bug into a feature...
+	static bool isTheUserToast = false; //Static ensurese my bug-to-feature will work!
 	static int failCount = 3;//Retry but not indefinitely.
 	int input; //Players input.
 	
@@ -33,10 +35,14 @@ int Player::get_input()
 			std::cout << "\nBad input... try again\n";
 			get_input();
 		} else {
-			std::cout << "\nCan you not screw up the input?\n";
-			std::cout << "At least you've confirmed the input validator works.\n";
-			std::cout << "So thats good. Now exiting program on grounds of user error.\n";
-			return -1; //User error.
+			if (!isTheUserToast) {
+				std::cout << "You have one more chance. Don't blow it...";
+				isTheUserToast = true;
+				return -1; //User error.
+			} else {
+				std::cout << "You blew it. BYE!";
+				return -1; //I TOTALLY JUST TURNED A BUG INTO A FEATURE!!!
+			}
 		}
 	}
 }
