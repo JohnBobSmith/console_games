@@ -1,0 +1,73 @@
+#ifndef GAME_H
+#define GAME_H
+
+class Game
+{
+	public:
+		//Standard Con/Destructors
+		Game(); //Initialize the board
+		~Game(); //Not sure if I need this, but it's here in case
+	
+		//Are we playing the game?
+		bool isRunning = true;
+		
+		//Return the bounds of our board.
+		//Useful for, say, only allowing the player
+		//to make a move within board boundaries
+		//when player data is in a different class.
+		int get_max_rows() { return MAX_ROWS; }
+		int get_max_cols() { return MAX_COLS; }
+	
+		//Return our private piece variables for public use.
+		char get_piece_x() { return pieceX; }
+		char get_piece_o() { return pieceO; } 
+	
+		//Print the board in its current state
+		void print_board();
+	
+		//Check for an overlap, IE placing an X on top of an O.
+		//Returns false if there is an overlap. The space is invalid.
+		//Does NOT check for input sanity or bounds!!! This is done
+		//in some other class, likely going to be the player class.
+		bool is_valid_space(int xPosition, int yPosition, char piece);
+	
+		//Check for every possible win using piece as the winning piece.
+		//For example, check if O is the winning piece.
+		//Returns true on a win, false otherwise.
+		bool is_victory(char piece);
+	
+		//Allow a different function/class/file/whatever to acces the board.
+		//This is done to allow placement of pieces to the board without
+		//the risk of accidently trashing it. is_valid_space() should always
+		//be called first, and it likely will be called in this function.
+		//Returns false if it cannot place the piece.
+		bool place_new_piece(int xPosition, int yPosition, char piece);
+	
+		//Removes all pieces from the board, re-sets the score (if I chose to 
+		//implement scoring) to zero. This is used in preperation for a new game.
+		void reset();
+	
+	private:
+		//Three win calcualtion functions to make my job easier.
+		//Check for vertical, horizontal, or diagonal wins independently.
+		//Used by is_victory() to simplify win checking even more.
+		bool is_win_vertical(char piece);
+		bool is_win_horizontal(char piece);
+		bool is_win_diagonal(char piece);
+	
+		//Board specific variables. Private to prevent accidental
+		//modifcations. But with users these days, you can
+		//never really be certain...
+		static const int MAX_ROWS = 3; //Bounds for our board array
+		static const int MAX_COLS = 3;
+		char board[MAX_ROWS][MAX_COLS]; //The board itself
+		
+		//These make setting up the board/player(s)/etc MUCH easier.
+		char pieceX = 'X'; //The player class assigns these variables to a local var.
+		char pieceO = 'O'; //for example, something like: player.set_piece(game.pieceX);
+		char pieceNeutral = '-'; //The blank or empty piece.
+};
+
+#endif
+
+
