@@ -77,43 +77,69 @@ int main()
 					int randomNum = rand() % 100;
 					if (randomNum % 2 == 0) {
 						if(player.isTwoHumanPlayer) {
-							std::cout << "Player two's random piece is X";
+							std::cout << "Player two's random piece is X. Player one will be O";
 							player2.playerPiece ='X';
+							player.playerPiece = 'O';
 						} else {
-							std::cout << "Player two's random piece is O";
-							player2.playerPiece = 'O';
+							std::cout << "\nYour random piece is X";
+							player.playerPiece = 'X'; 
 						}
-						std::cout << "\nYour random piece is X";
-						player.playerPiece = 'X';
 					} else {
-						std::cout << "\nYour random piece is O";
-						player.playerPiece = 'O';
+						if (player.isTwoHumanPlayer) {
+							std::cout << "Player two's random piece is O. Player one will be X";
+							player2.playerPiece = 'O';
+							player.playerPiece = 'X';
+						} else {
+							std::cout << "\nYour random piece is O";
+							player.playerPiece = 'O';
+						}
 					}
 				}
 
 				if (userInput[0] == 1) {
-					std::cout << "\nYour piece is X";
-					player.playerPiece = 'X';
-					if (player.isTwoHumanPlayer) {
-						std::cout << "Player two's random piece is X";
-						player2.playerPiece = 'X';
+					if(player.isTwoHumanPlayer) {
+						std::cout << "Player two's piece is X. Player one will be O";
+						player2.playerPiece ='X';
+						player.playerPiece = 'O';
+					} else {
+						std::cout << "\nYour piece is X";
+						player.playerPiece = 'X'; 
 					}
 				}
 				if (userInput[0] == 2) {
-					std::cout << "\nYour piece is O";
-					player.playerPiece = 'O';
+					if (player.isTwoHumanPlayer) {
+						std::cout << "Player two's piece is O. Player one will be X.";
+						player2.playerPiece = 'O';
+						player.playerPiece = 'X';
+					} else {
+						std::cout << "\nYour piece is O";
+						player.playerPiece = 'O';
+					}
 				}
 				std::cout << "\nSetup complete! You may begin playing... NOW!";
 				game.isSetupComplete = true; //Prevent infinite if statement.
 			}
 		}
+		
+		//The following boolean decides which player does what at any given time.		
+		static bool isPlayerTurn = true; //Player one goes. 
+		
+		if (player.isTwoHumanPlayer) {
+			if (isPlayerTurn) {
+				std::cout << "Player one, enter the X position then Y position of your move.\n";
+				userInput[0] = player.get_input();
+				userInput[1] = player.get_input();
+			} else {
+				std::cout << "Player two, enter the X position then Y position of your move.\n";
+				userInput[0] = player.get_input();
+				userInput[1] = player.get_input();			
+			}
+		} else {
+			std::cout << "Enter the X position then the Y position of your move.\n";
+			userInput[0] = player.get_input();
+			userInput[0] = player.get_input();
+		}
 
-		game.print_board();
-		
-		std::cout << "enter the X value then the Y value of your move.\n";
-		userInput[0] = player.get_input();
-		userInput[1] = player.get_input();
-		
 		if (userInput[0] == -1 || userInput[1] == -1) {
 			game.isRunning = false;
 			return -1; //My input validtaor had only one job...
@@ -126,24 +152,34 @@ int main()
 			game.isRunning = false;
 			return 0;
 		} else {
-			gameInput[0] = userInput[0];
-			gameInput[1] = userInput[1];
 			std::cout << "You entered: " << userInput[0] << ":" << userInput[1];
 			std::cout << "\nMaking move...";
 			//Deliberate input-swap to avoid chaning 3+ lines of code.
 			//X is first, Y is second. Now our board array thinks so too.
-			game.add_new_piece(gameInput[1], gameInput[0], player.playerPiece);
+			if (player.isTwoHumanPlayer) {
+				if (isPlayerTurn) {
+					game.add_new_piece(gameInput[1], gameInput[0], player.playerPiece);
+				} else {
+					game.add_new_piece(gameInput[1], gameInput[0], player2.playerPiece);	
+				}
+				
+			} else {
+				game.add_new_piece(gameInput[1], gameInput[0], player.playerPiece);
+			}
 			game.print_board();
 		}
 		
-		if (game.is_victory('X') && player.playerPiece == 'X') {
-			std::cout << "\n\nY O U  W I N ! ! !\n\n";
+		
+		//Whoever wins first wins first, there is no other option.
+		//You cannot tie for win in tic tac toe, but you can draw.
+		if (game.is_victory(player.playerPiece)) {
+			std::cout << "\n\nPlayer one wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
 			return 0;
 		}
 		
-		if (game.is_victory('O') && player.playerPiece == 'O') {
-			std::cout << "\n\nY O U  W I N ! ! !\n\n";
+		if (game.is_victory(player2.playerPiece)) {
+			std::cout << "\n\nPlayer two wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
 			return 0;
 		}

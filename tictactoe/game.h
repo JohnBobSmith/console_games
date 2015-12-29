@@ -38,6 +38,12 @@ class Game
 		//For example, check if O is the winning piece.
 		//Returns true on a win, false otherwise.
 		bool is_victory(char piece);
+		
+		//Check if the board is completely full. When playing tic tac toe,
+		//and no more moves can be made, the game is at a draw, or stalemate.
+		//This function checks for said stalemate. Returns true if the board 
+		//is full, false if there are still valid tiles remaining.
+		bool is_board_full();
 	
 		//Allow a different function/class/file/whatever to acces the board.
 		//This is done to allow placement of pieces to the board without

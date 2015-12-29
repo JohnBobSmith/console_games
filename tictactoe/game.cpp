@@ -36,6 +36,27 @@ bool Game::is_valid_space(int xPosition, int yPosition)
 	return true; //All clear. Neutral piece is a green light.
 }
 
+bool Game::is_board_full()
+{
+	//Static int because only this function shall use it,
+	//and static so that I can call the function without
+	//re-setting the value.
+	static int blankTilesRemaining = 9;
+	for (int row = 0; row < MAX_ROWS; row++) {
+		for (int col = 0; col < MAX_COLS; col++) {
+			if (board[row][col] != pieceNeutral) {
+				blankTilesRemaining -= 1;
+			}
+		}
+	}
+	if (blankTilesRemaining == 0) {
+		//Board is full.
+		return true;	
+	} else {
+		return false; //The board is empty.
+	}
+	return false;
+}
 
 bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 {
@@ -44,6 +65,7 @@ bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 		return true;
 	} else {
 		std::cout << "Error: Overlap on " << xPosition << ":" << yPosition << "...\n";
+		return false; //For sure exit, a possible logic error fix.
 	}
 	return false; //Cannot place the piece
 }
