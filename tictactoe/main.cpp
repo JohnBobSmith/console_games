@@ -158,13 +158,12 @@ int main()
 			//X is first, Y is second. Now our board array thinks so too.
 			if (player.isTwoHumanPlayer) {
 				if (isPlayerTurn) {
-					game.add_new_piece(gameInput[1], gameInput[0], player.playerPiece);
+					game.add_new_piece(userInput[0], userInput[1], player.playerPiece);
+					isPlayerTurn = false;
 				} else {
-					game.add_new_piece(gameInput[1], gameInput[0], player2.playerPiece);	
+					game.add_new_piece(userInput[0], userInput[1], player2.playerPiece);
+					isPlayerTurn = true;				
 				}
-				
-			} else {
-				game.add_new_piece(gameInput[1], gameInput[0], player.playerPiece);
 			}
 			game.print_board();
 		}
