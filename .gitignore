@@ -1,6 +1,9 @@
 #Personal edit to say that I really like these .gitignore files :D
 #Also removed fortran modules and other irrelevant stuff.
 
+#Do not include my tictactoe executable. That was a mistake.
+tictactoe
+
 # Compiled Object files
 *.slo
 *.lo
