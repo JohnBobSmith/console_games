@@ -17,7 +17,7 @@ int main()
 	//Welcome message/banner
 	std::cout << "\n\nW E L C O M E  T O  T I C  T A C  T O E\n\n";	
 	
-	while (game.isRunning) {
+	while (game.isRunning) {													
 		//One time welcome and setup stuff next ~50 lines...
 		if (!game.isSetupComplete) {
 			std::cout << "How many human players are there? 1 or 2?\n";
@@ -60,15 +60,15 @@ int main()
 					//Delibrately create a bug here to allow
 					//the bug-to-feature introduced in my input
 					//validator to work.
-					/*
-						Basically I need to make 2 input requests,
-						one for X and one for the Y positions on the grid,
-						but I was having serious trouble with it. So now
-						I use the extra input requset to inform the user this
-						is his very last chance and to tell him he blew it 
-						otherwise. A sort of joke from a bug I haven't yet
-						figured out, hence the bug-to-feature code in player.cpp.
-					*/
+					//
+					//	Basically I need to make 2 input requests,
+					//	one for X and one for the Y positions on the grid,
+					//	but I was having serious trouble with it. So now
+					//	I use the extra input requset to inform the user this
+					//	is his very last chance and to tell him he blew it 
+					//	otherwise. A sort of joke from a bug I haven't yet
+					//	figured out, hence the bug-to-feature code in player.cpp.
+					//
 					userInput[0] = player.get_input(); //No harm in programmer humor.
 					return -1; //Silly users, making me convert bugs into features haha. 
 				}
@@ -116,7 +116,7 @@ int main()
 						player.playerPiece = 'O';
 					}
 				}
-				std::cout << "\nSetup complete! You may begin playing... NOW!";
+				std::cout << "\nSetup complete! You may begin playing... NOW!\n\n";
 				game.isSetupComplete = true; //Prevent infinite if statement.
 			}
 		}
@@ -180,6 +180,12 @@ int main()
 		if (game.is_victory(player2.playerPiece)) {
 			std::cout << "\n\nPlayer two wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
+			return 0;
+		}
+		
+		if (game.is_board_full()) {
+			//stalemate...
+			std::cout << "Aw shucks. No one wins :(.\nNow Exiting.";
 			return 0;
 		}
 	}

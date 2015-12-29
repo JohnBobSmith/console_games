@@ -49,7 +49,7 @@ bool Game::is_board_full()
 			}
 		}
 	}
-	if (blankTilesRemaining == 0) {
+	if (blankTilesRemaining <= 0) {
 		//Board is full.
 		return true;	
 	} else {
