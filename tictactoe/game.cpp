@@ -42,13 +42,12 @@ bool Game::is_board_full()
 	//and static so that I can call the function without
 	//re-setting the value.
 	static int blankTilesRemaining = 9;
-	for (int row = 0; row < MAX_ROWS; row++) {
-		for (int col = 0; col < MAX_COLS; col++) {
-			if (board[row][col] != pieceNeutral) {
-				blankTilesRemaining -= 1;
-			}
-		}
-	}
+	
+	/*
+		TODO: 
+		Implement proper stalemate detection...
+	*/
+	
 	if (blankTilesRemaining <= 0) {
 		//Board is full.
 		return true;	
