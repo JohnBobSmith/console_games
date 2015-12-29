@@ -8,10 +8,17 @@ class Player
 		Player();
 		~Player();
 		
+		//Used to determine who the game is played against.
+		//If this is true, 2 humans players are playing.
+		//Two humans are assumed becuse you need a minimum
+		//of one, and second player comes into play via this
+		//variable.
+		bool isTwoHumanPlayer = false;
+		
 		//The previous player piece system was a bit of a fail.
 		//Now opting for a public player piece, which gets assigned
 		//The non-neutral value from main and the users input.
-		char playerPiece;
+		char playerPiece = '-';
 		
 		//Get user input, no sanitation/validation.
 		//This function does call a sanitation function,

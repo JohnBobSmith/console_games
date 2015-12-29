@@ -5,8 +5,7 @@
 
 Player::Player()
 {
-	//Start off as neutral.
-	playerPiece = '-';
+	//ctor
 }
 
 Player::~Player()

@@ -11,6 +11,9 @@ class Game
 		//Are we playing the game?
 		bool isRunning = true;
 		
+		//Are we done some 1 time setup stuff?
+		bool isSetupComplete = false;
+		
 		//Return the bounds of our board.
 		//Useful for, say, only allowing the player
 		//to make a move within board boundaries
