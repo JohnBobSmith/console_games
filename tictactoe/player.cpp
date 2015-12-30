@@ -2,6 +2,7 @@
 #include "game.h"
 #include <iostream>
 #include <limits>
+#include <string>
 
 Player::Player()
 {
@@ -64,7 +65,10 @@ bool Player::sanitize_input(int input)
 }
 
 		
-		
+int Player::parse_input(int input, std::string message)
+{
+
+}
 		
 		
 		
