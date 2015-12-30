@@ -8,6 +8,11 @@ class Player
 		Player();
 		~Player();
 		
+		//The following boolean decides which player goes.
+		//For example, player one moves, player two move.
+		//A value of true means it is player ones turn.
+		bool isPlayerTurn = true; 
+		
 		//Used to determine who the game is played against.
 		//If this is true, 2 humans players are playing.
 		//Two humans are assumed becuse you need a minimum
