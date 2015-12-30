@@ -24,8 +24,11 @@ int Player::get_input()
 	std::cin >> input;
 	
 	if (sanitize_input(input)) {
-		return input;
-		//parse_input();
+		if (input == 9) {
+			return -1; 
+		} else {
+			return input;
+		}
 	} else {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

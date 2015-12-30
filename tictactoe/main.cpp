@@ -24,15 +24,9 @@ int main()
 			std::cout << "A value of zero will also start a single player\n";
 			std::cout << "game in the same way a value of 1 would.\n";
 			userInput[0] = player.get_input();
-			if (userInput[0] == 9) {
-				//valid exit.
-				std::cout << "\n\nExit requested. Goodbye!\n\n";
-				game.isRunning = false;
-				return 0;
-			}
-	
 			if (userInput[0] == -1) {
-				//error-based exit.
+				//Generic exit code error.
+				std::cout << "\n\nExit requested and/or enforced by an error.\n\n";
 				game.isRunning = false;
 				return -1;
 			}
@@ -48,14 +42,10 @@ int main()
 				std::cout << "Which piece would you like. X or O?\n";
 				std::cout << "Enter 1 for X, 2 for O, A zero for random.\n";
 				userInput[0] = player.get_input();
-
-				if (userInput[0] == 9) {
-					//valid exit.
-					std::cout << "\n\nExit requested. Goodbye!\n\n";
-					game.isRunning = false;
-					return 0;
-				}
-
+/*
+				----------------------------------
+				PRESERVING THIS MOMENT IN HISTORY
+				----------------------------------
 				if (userInput[0] == -1) {
 					//Delibrately create a bug here to allow
 					//the bug-to-feature introduced in my input
@@ -72,7 +62,13 @@ int main()
 					userInput[0] = player.get_input(); //No harm in programmer humor.
 					return -1; //Silly users, making me convert bugs into features haha. 
 				}
-	
+*/
+				if (userInput[0] == -1) {
+					//Generic exit code error.
+					std::cout << "\n\nExit requested and/or enforced by an error.\n\n";
+					game.isRunning = false;
+					return -1;
+				}
 				if (userInput[0] == 0) {
 					int randomNum = rand() % 100;
 					if (randomNum % 2 == 0) { //Number is even.
@@ -143,16 +139,10 @@ int main()
 		}
 
 		if (userInput[0] == -1 || userInput[1] == -1) {
+			//Generic exit code error.
+			std::cout << "\n\nExit requested and/or enforced by an error.\n\n";
 			game.isRunning = false;
-			return -1; //My input validtaor had only one job...
-			//And he still has it. You, user, you're fired!
-		}
-		
-		if (userInput[0] == 9 || userInput[1] == 9) {
-			//Valid user exit.
-			std::cout << "\n\nUser exit requested. Goodbye!";
-			game.isRunning = false;
-			return 0;
+			return -1;
 		} else {
 			std::cout << "You entered: " << userInput[0] << ":" << userInput[1];
 			std::cout << "\nMaking move...";
@@ -174,7 +164,7 @@ int main()
 		
 		//Whoever wins first wins first, there is no other option.
 		//You cannot tie for win in tic tac toe, but you can draw
-		//and/or stalemate the game. <--- happens regularly... stalemate...
+		//and/or stalemate the game. <--- happens regularly... stalemates :Z
 		if (game.is_victory(player.playerPiece)) {
 			std::cout << "\n\nPlayer one wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
