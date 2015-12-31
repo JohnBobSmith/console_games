@@ -1,0 +1,34 @@
+### A GLOBAL CHANGELOG FILE
+THIS IS NOW A MUST BECAUSE I AM STARTING TO MAKE MASSIVE CHAGNES
+CHANGELOG FORMAT WILL BE: <date> <enter, tab> <subproject> <enter, tab> <hypehn> CHANGES
+---FOR EXAMPLE---
+
+THURSDAY DECEMBER 31
+  -Added the changelog
+  
+  tictactoe
+    -a heck of a lot of changes ;).
+    
+---END EXAMPLE---
+
+Changes for Thursday, December 31st:
+  -Added a changelog file. It is now mandatory to keep track of my massive commits.
+  
+  Changes for Tic Tac Toe:
+    -A much nicer way of adding pieces. The player now picks a number, 0 through 8, which corresponds
+    with their move. Still a work in progress, but games are playable with the new "UI" if you will.
+    
+    -Severely reduced the ammount of code in main(). Further input optimizations.
+    
+    -added int Game::make_move(int input, char piece); This allows (hopefully) error-free placement of player pieces.
+    
+    -scrapped Player::parse_input() as it was impossible to get working. 
+    
+    -0 through 9 are all valid inputs, and my input validator now thinks so too.
+    
+    -Added basic CLI argument support. Number of players and prefered pieces are now done via these arguments. As an example,
+    ./tictactoe 20 starts a two player game with random (0) pieces. More documentation to come as I flesh it (CLI args) out further.
+    This drastically simplifies things and further optimizes the code in main().
+    
+    -Basically removed code for a single player game at this time. I have every intention of making a single player AI in the future.
+    
