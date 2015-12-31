@@ -51,24 +51,17 @@ int Player::get_input()
 }
 
 bool Player::sanitize_input(int input)
-{
-	Game game; //For checking if input is within bounds of board.
-	
+{	
 	if (input == 9) {
 		return true; //9 is valid input for an exit.
 	}
 	
-	if (std::cin.fail() || input < 0 || input >= game.get_max_rows()) {
+	if (std::cin.fail() || input < 0 || input >= 9) {
 		return false; //Failed input
 	} 
 	return true; //No failure detected, so input is valid.
 }
 
-		
-int Player::parse_input(int input, std::string message)
-{
-
-}
 		
 		
 		

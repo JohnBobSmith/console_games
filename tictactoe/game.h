@@ -5,14 +5,11 @@ class Game
 {
 	public:
 		//Standard Con/Destructors
-		Game(); //Initialize the board
+		Game(); //Initialize the board.
 		~Game(); //Not sure if I need this, but it's here in case
 	
 		//Are we playing the game?
 		bool isRunning = true;
-		
-		//Are we done some 1 time setup stuff?
-		bool isSetupComplete = false;
 		
 		//Return the bounds of our board.
 		//Useful for, say, only allowing the player
@@ -55,6 +52,12 @@ class Game
 		//Removes all pieces from the board, re-sets the score (if I chose to 
 		//implement scoring) to zero. This is used in preperation for a new game.
 		void reset();
+		
+		//Simple random number generator, with bounds.
+		int get_random_num(int bound = 0);
+		
+		//Place a piece on the board based on user input.
+		int make_move(int input, char piece);
 	
 	private:
 		//Three win calcualtion functions to make my job easier.

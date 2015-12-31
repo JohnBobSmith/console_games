@@ -1,5 +1,7 @@
 #include "game.h"
+#include "player.h"
 #include <iostream>
+#include <cstdlib>
 
 Game::Game()
 {
@@ -38,35 +40,20 @@ bool Game::is_valid_space(int xPosition, int yPosition)
 
 bool Game::is_board_full()
 {
-	//Static int because only this function shall use it,
-	//and static so that I can call the function without
-	//re-setting the value.
-	static int blankTilesRemaining = 9;
-	
-	/*
-		TODO: 
-		Implement proper stalemate detection...
-	*/
-	
-	if (blankTilesRemaining <= 0) {
-		//Board is full.
-		return true;	
-	} else {
-		return false; //The board is empty.
-	}
+	//Still working on stalemate detection...
 	return false;
 }
 
 bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 {
-	if (is_valid_space(xPosition, yPosition)) {
-		board[xPosition][yPosition] = piece; //All clear, place piece
-		return true;
-	} else {
-		std::cout << "Error: Overlap on " << xPosition << ":" << yPosition << "...\n";
-		return false; //For sure exit, a possible logic error fix.
-	}
-	return false; //Cannot place the piece
+	//if (is_valid_space(xPosition, yPosition)) {
+	board[xPosition][yPosition] = piece; //All clear, place piece
+	return true;
+	//} else {
+	//	std::cout << "Error: Overlap on " << xPosition << ":" << yPosition << "...\n";
+	//	return false; //For sure exit, a possible logic error fix.
+	//}
+	//return false; //Cannot place the piece
 }
 
 void Game::reset()
@@ -76,6 +63,59 @@ void Game::reset()
 		for (int col = 0; col < MAX_COLS; col++) {
 			board[row][col] = pieceNeutral;
 		}
+	}
+}
+
+int Game::get_random_num(int bound)
+{
+	int randomNum = rand() % bound;
+	return randomNum;
+}
+
+int Game::make_move(int input, char piece)
+{
+	if (input == -1) {
+		return -1;
+	}
+
+	if (input == 0) {
+		add_new_piece(0, 0, piece);
+	}
+
+	if (input == 1) {
+		add_new_piece(0, 1, piece);
+	}
+
+	if (input == 2) {
+		add_new_piece(0, 2, piece);
+	}
+
+	if (input == 3) {
+		add_new_piece(1, 0, piece);
+	}
+	if (input == 4) {
+		add_new_piece(1, 1, piece);
+	}
+
+	if (input == 5) {
+		add_new_piece(1, 2, piece);
+	}
+
+	if (input == 6) {
+		add_new_piece(2, 0, piece);
+	}
+
+	if (input == 7) {
+		add_new_piece(2, 1, piece);
+	
+	}
+
+	if (input == 8) {
+		add_new_piece(2, 2, piece);
+	}
+	
+	if (input == 9) {
+		return -1; //Generic exit
 	}
 }
 

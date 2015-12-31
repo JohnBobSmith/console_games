@@ -4,163 +4,82 @@
 #include <ctime>
 #include <cstdlib>
 
-int main()
+int main(int argc, char **argv)
 {
 	srand(time(0)); //Random numbers.
 	Game game;
 	Player player;
 	Player player2; //Unused if we dont have isTwoHumanPlayer set.
 
-	int userInput[2]; //Generalized user input.
-	int gameInput[2]; //for when playing.
-		
+	char piece = '-';	//current players player piece.
+	
+	if (argc < 2) {
+		std::cout << "Please enter how many players you would like. 1 or 2.\n";
+		std::cout << "Also enter which piece player one is. NO spaces\n";
+		std::cout << "Example: ./tictactoe 20 for two player game, random piece.\n";
+		std::cout << "Additional help will come when I'm closer to releasing game fully...\n";
+		return 0;
+	}
+	
 	//Welcome message/banner
 	std::cout << "\n\nW E L C O M E  T O  T I C  T A C  T O E\n\n";	
 	
-	while (game.isRunning) {													
-		//One time welcome and setup stuff next ~50 lines...
-		if (!game.isSetupComplete) {
-			std::cout << "How many human players are there? 1 or 2?\n";
-			std::cout << "A value of zero will also start a single player\n";
-			std::cout << "game in the same way a value of 1 would.\n";
-			userInput[0] = player.get_input();
-			if (userInput[0] == -1) {
-				//Generic exit code error.
-				std::cout << "\n\nExit requested and/or enforced by an error.\n\n";
-				game.isRunning = false;
-				return -1;
-			}
-
-			if (userInput[0] == 1 || userInput[0] == 0) {
-				std::cout << "A single player game will begin shortly.\n";
-			} 
-			if (userInput[0] == 2) {
-				std::cout << "A two player game will begin shortly.\n";
-				player.isTwoHumanPlayer = true;
-			}
-			if (player.playerPiece == '-') {
-				std::cout << "Which piece would you like. X or O?\n";
-				std::cout << "Enter 1 for X, 2 for O, A zero for random.\n";
-				userInput[0] = player.get_input();
-/*
-				----------------------------------
-				PRESERVING THIS MOMENT IN HISTORY
-				----------------------------------
-				if (userInput[0] == -1) {
-					//Delibrately create a bug here to allow
-					//the bug-to-feature introduced in my input
-					//validator to work.
-					//
-					//	Basically I need to make 2 input requests,
-					//	one for X and one for the Y positions on the grid,
-					//	but I was having serious trouble with it. So now
-					//	I use the extra input requset to inform the user this
-					//	is his very last chance and to tell him he blew it 
-					//	otherwise. A sort of joke from a bug I haven't yet
-					//	figured out, hence the bug-to-feature code in player.cpp.
-					//
-					userInput[0] = player.get_input(); //No harm in programmer humor.
-					return -1; //Silly users, making me convert bugs into features haha. 
-				}
-*/
-				if (userInput[0] == -1) {
-					//Generic exit code error.
-					std::cout << "\n\nExit requested and/or enforced by an error.\n\n";
-					game.isRunning = false;
-					return -1;
-				}
-				if (userInput[0] == 0) {
-					int randomNum = rand() % 100;
-					if (randomNum % 2 == 0) { //Number is even.
-						if(player.isTwoHumanPlayer) {
-							std::cout << "Player one's random piece is O. Player two will be X";
-							player.playerPiece = 'O';
-							player2.playerPiece ='X';
-						} else {
-							//Single player game.
-							std::cout << "\nYour random piece is X";
-							player.playerPiece = 'X'; 
-						}
-					} else { //Number is odd.
-						if (player.isTwoHumanPlayer) {
-							std::cout << "Player one's random piece is X. Player two will be O";
-							player.playerPiece = 'X';
-							player2.playerPiece = 'O';
-						} else {
-							//Single player.
-							std::cout << "\nYour random piece is O";
-							player.playerPiece = 'O';
-						}
-					}
-				}
-
-				if (userInput[0] == 1) {
-					if(player.isTwoHumanPlayer) {
-						std::cout << "Player ones's piece is X. Player two will be O";
-						player.playerPiece = 'X';						
-						player2.playerPiece ='O';
-					} else {
-						//Single player.
-						std::cout << "\nYour piece is X";
-						player.playerPiece = 'X'; 
-					}
-				}
-				if (userInput[0] == 2) {
-					if (player.isTwoHumanPlayer) {
-						std::cout << "Player one's piece is O. Player two will be X.";
-						player.playerPiece = 'O';
-						player2.playerPiece = 'X';
-					} else {
-						std::cout << "\nYour piece is O";
-						player.playerPiece = 'O';
-					}
-				}
-				std::cout << "\nSetup complete! You may begin playing... NOW!\n\n";
-				game.isSetupComplete = true; //Prevent infinite if statement.
-			}
+	if (strtol(argv[1], NULL, 10) == 20) {
+		std::cout << "Starting 2 player game, random pieces.\n";
+		std::cout << "Chosing random piece...\n";
+		if (game.get_random_num(100) % 2 == 0) {
+			player.playerPiece = 'X';
+			player2.playerPiece = 'O';
+			std::cout << "Player one, your piece is " << player.playerPiece << "\n";
+			std::cout << "Player two, your piece is " << player2.playerPiece << "\n";
+			player.isTwoHumanPlayer = true;
+		} else {
+			std::cout << "Player one, your piece is O\n";
+			std::cout << "Player two, your piece is X\n";
+			player.playerPiece = 'O';
+			player2.playerPiece = 'X';
+			player.isTwoHumanPlayer = true;
 		}
-		
+	}
+	
+	if (strtol(argv[1], NULL, 10) == 21) {
+		std::cout << "Starting 2 player game, player on is X.\n";
+		player.playerPiece = 'X';
+		player2.playerPiece = 'O';
+		player.isTwoHumanPlayer = true;
+	}
+	
+	if (strtol(argv[1], NULL, 10) == 22) {
+		std::cout << "Starting 2 player game, player one is O.\n";
+		player.playerPiece = 'O';
+		player2.playerPiece = 'X';
+		player.isTwoHumanPlayer = true;
+	}
 
-		
+	while (game.isRunning) {
+		//Time to play the game!
+		int userInput = 0;
 		if (player.isTwoHumanPlayer) {
 			if (player.isPlayerTurn) {
-				std::cout << "Player one, enter the X position then Y position of your move.\n";
-				userInput[0] = player.get_input();
-				userInput[1] = player.get_input();
+				piece = player.playerPiece;
+				std::cout << "Player one, enter the number of the square you want.\n";
+				userInput = player.get_input();
+				game.make_move(userInput, player.playerPiece);
+				player.isPlayerTurn = false;
 			} else {
-				std::cout << "Player two, enter the X position then Y position of your move.\n";
-				userInput[0] = player.get_input();
-				userInput[1] = player.get_input();			
+				piece = player2.playerPiece;
+				std::cout << "Player two, enter the number of the square you want.\n";
+				userInput = player.get_input();
+				game.make_move(userInput, player2.playerPiece);
+				player.isPlayerTurn = true;
 			}
-		} else {
-			std::cout << "Enter the X position then the Y position of your move.\n";
-			userInput[0] = player.get_input();
-			userInput[0] = player.get_input();
-		}
-
-		if (userInput[0] == -1 || userInput[1] == -1) {
-			//Generic exit code error.
-			std::cout << "\n\nExit requested and/or enforced by an error.\n\n";
-			game.isRunning = false;
-			return -1;
-		} else {
-			std::cout << "You entered: " << userInput[0] << ":" << userInput[1];
-			std::cout << "\nMaking move...";
-			if (player.isTwoHumanPlayer) {
-				if (player.isPlayerTurn) {
-					game.add_new_piece(userInput[0], userInput[1], player.playerPiece);
-					player.isPlayerTurn = false; //Player one just finished, queue player two.
-				} else {
-					game.add_new_piece(userInput[0], userInput[1], player2.playerPiece);
-					player.isPlayerTurn = true; //Player two just finished, queue player one.				
-				}
-			} else {
-				//Single human player.
-				game.add_new_piece(userInput[0], userInput[1], player.playerPiece);
-			}
-			game.print_board();
 		}
 		
+		if (userInput == -1) {
+			return -1;
+		}
+		
+		game.print_board();
 		
 		//Whoever wins first wins first, there is no other option.
 		//You cannot tie for win in tic tac toe, but you can draw
@@ -178,8 +97,8 @@ int main()
 		}
 		
 		if (game.is_board_full()) {
-			//stalemate...
-			std::cout << "Aw shucks. No one wins :(.\nNow Exiting.";
+			std::cout << "That sucks. No one wins :(\n";
+			std::cout << "Exiting on grounds of stalemate.\n\n";
 			return 0;
 		}
 	}

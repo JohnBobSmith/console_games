@@ -39,15 +39,6 @@ class Player
 		//sanitization chemicals... Returns true if good input,
 		//false otherwise. 
 		bool sanitize_input(int input);
-		
-		//Fully parse the entire input, including errors, user
-		//and/or program exits, from a single function with other
-		//mini-function as needed. This way, we can avoid repeating
-		//literally 30+ lines of code. if userinput == 0 here, do this.
-		//Same check but elsewhere, do this instead... etc. This also
-		//allows for a message to be displayed. This is useful for 
-		//those repeat message, mostly in setup. "player one's/two's piece is..".
-		int parse_input(int input, std::string message);
 };
 
 #endif
