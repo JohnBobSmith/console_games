@@ -32,3 +32,13 @@ Changes for Thursday, December 31st:
     
     -Basically removed code for a single player game at this time. I have every intention of making a single player AI in the future.
     
+Changes for Friday Janruary 21st 2016:
+	-Happy new year! Thats a change ;)
+	
+		Changes for Tic Tac Toe:
+		-Working on setting up proper stalemate detection
+	
+		-Likely fixed a bug here or there. Nothing too specfic.
+		
+		-Work on 2 human player games continues.
+    
