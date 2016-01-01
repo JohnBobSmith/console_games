@@ -11,6 +11,11 @@ class Game
 		//Are we playing the game?
 		bool isRunning = true;
 		
+		//The easiest way I could implement stalemate 
+		//detection with my limited knowledge.
+		//Is the board completely full, thereby causing a stalemate?
+		bool isStalemate = false; 
+		
 		//Return the bounds of our board.
 		//Useful for, say, only allowing the player
 		//to make a move within board boundaries

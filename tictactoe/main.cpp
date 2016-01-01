@@ -59,37 +59,46 @@ int main(int argc, char **argv)
 	while (game.isRunning) {
 		//Time to play the game!
 		int userInput = 0;
+
 		if (player.isTwoHumanPlayer) {
 			if (player.isPlayerTurn) {
 				piece = player.playerPiece;
 				std::cout << "Player one, enter the number of the square you want.\n";
-				userInput = player.get_input();
+				userInput = player.get_input();	
+				if (userInput == -1) {
+					std::cout << "\n\nExiting the game on grounds of user error or request.\n\n";;
+					return -1;
+				}
+				
 				if  (game.make_move(userInput, player.playerPiece) == 1) {
-					 std::cout << "Stalemate detected...Exiting game. \n";
-					return 0;
+					std::cout << "Overlap detected... \n";
+					std::cout << "Player 1, try again.\n";
+					player.isPlayerTurn = true;
 				}
 				player.isPlayerTurn = false;
 			} else {
 				piece = player2.playerPiece;
 				std::cout << "Player two, enter the number of the square you want.\n";
 				userInput = player.get_input();
-				if (game.make_move(userInput, player2.playerPiece) == 1) {
-					std::cout << "Stalemate detected...Exiting game. \n";
-					return 0;
+				if (userInput == -1) {
+					std::cout << "\n\nExiting the game on grounds of user error or request.\n\n";;
+					return -1;
+				}
+				
+				if  (game.make_move(userInput, player.playerPiece) == 1) {
+					std::cout << "Overlap detected... \n";
+					std::cout << "Player 2, try again.\n";
+					player.isPlayerTurn = false;
 				}
 				player.isPlayerTurn = true;
 			}
 		}
-		
-		if (userInput == -1) {
-			return -1;
-		}
-		
 		game.print_board();
 		
 		//Whoever wins first wins first, there is no other option.
 		//You cannot tie for win in tic tac toe, but you can draw
 		//and/or stalemate the game. <--- happens regularly... stalemates :Z
+		/*
 		if (game.is_victory(player.playerPiece)) {
 			std::cout << "\n\nPlayer one wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
@@ -100,7 +109,12 @@ int main(int argc, char **argv)
 			std::cout << "\n\nPlayer two wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
 			return 0;
-		}	
+		}
+		*/
+		if (game.isStalemate) {
+			std::cout << "\n\nNobody wins!\n\n";
+			std::cout << "Now exiting on grounds of an angry stalemate. ARgh!\n\n";
+		}
 	}
 }
 

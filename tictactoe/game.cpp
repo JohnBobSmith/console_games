@@ -48,15 +48,15 @@ bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 		board[xPosition][yPosition] = piece; //All clear, place piece
 		//We placed a piece, therefore we have 1 less spot open.
 		openTiles -= 1;
-		//If we have no remaining pieces
-		if (openTiles <= 0) {
-			return false; //Cannot place anymore pieces.
+		if (openTiles <= 0) { //If we have no spots open...
+			isStalemate = true; //...the board is full.
 		}
-		return true; //Place the piece as normal.
-	} else { //We didnt place a piece, so must be an overlap.
-		std::cout << "Overlap detected for position " << xPosition << ":" << yPosition << "...\n";
+	} else {
+		//Piece failed to place, therefore an overlap.
+		std::cout << "Overlap  detected...\n";
 		return false;
 	}
+	return true; //Function did its job.
 }
 
 void Game::reset()
