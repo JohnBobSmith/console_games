@@ -64,13 +64,19 @@ int main(int argc, char **argv)
 				piece = player.playerPiece;
 				std::cout << "Player one, enter the number of the square you want.\n";
 				userInput = player.get_input();
-				game.make_move(userInput, player.playerPiece);
+				if  (game.make_move(userInput, player.playerPiece) == 1) {
+					 std::cout << "Stalemate detected...Exiting game. \n";
+					return 0;
+				}
 				player.isPlayerTurn = false;
 			} else {
 				piece = player2.playerPiece;
 				std::cout << "Player two, enter the number of the square you want.\n";
 				userInput = player.get_input();
-				game.make_move(userInput, player2.playerPiece);
+				if (game.make_move(userInput, player2.playerPiece) == 1) {
+					std::cout << "Stalemate detected...Exiting game. \n";
+					return 0;
+				}
 				player.isPlayerTurn = true;
 			}
 		}
@@ -94,13 +100,7 @@ int main(int argc, char **argv)
 			std::cout << "\n\nPlayer two wins!\n\n";
 			std::cout << "Now exiting on grounds of happy victory ;)\n\n";
 			return 0;
-		}
-		
-		if (game.is_board_full()) {
-			std::cout << "That sucks. No one wins :(\n";
-			std::cout << "Exiting on grounds of stalemate.\n\n";
-			return 0;
-		}
+		}	
 	}
 }
 

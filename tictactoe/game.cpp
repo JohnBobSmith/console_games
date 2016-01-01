@@ -38,22 +38,25 @@ bool Game::is_valid_space(int xPosition, int yPosition)
 	return true; //All clear. Neutral piece is a green light.
 }
 
-bool Game::is_board_full()
-{
-	//Still working on stalemate detection...
-	return false;
-}
-
 bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 {
-	//if (is_valid_space(xPosition, yPosition)) {
-	board[xPosition][yPosition] = piece; //All clear, place piece
-	return true;
-	//} else {
-	//	std::cout << "Error: Overlap on " << xPosition << ":" << yPosition << "...\n";
-	//	return false; //For sure exit, a possible logic error fix.
-	//}
-	//return false; //Cannot place the piece
+	//Finally proper stalemate detection if this goes well.
+	//Keep track of our open tiles
+	static int openTiles = 9;
+	
+	if (is_valid_space(xPosition, yPosition)) {
+		board[xPosition][yPosition] = piece; //All clear, place piece
+		//We placed a piece, therefore we have 1 less spot open.
+		openTiles -= 1;
+		//If we have no remaining pieces
+		if (openTiles <= 0) {
+			return false; //Cannot place anymore pieces.
+		}
+		return true; //Place the piece as normal.
+	} else { //We didnt place a piece, so must be an overlap.
+		std::cout << "Overlap detected for position " << xPosition << ":" << yPosition << "...\n";
+		return false;
+	}
 }
 
 void Game::reset()
@@ -79,39 +82,57 @@ int Game::make_move(int input, char piece)
 	}
 
 	if (input == 0) {
-		add_new_piece(0, 0, piece);
+		if (!add_new_piece(0, 0, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 1) {
-		add_new_piece(0, 1, piece);
+		if (!add_new_piece(0, 1, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 2) {
-		add_new_piece(0, 2, piece);
+		if (!add_new_piece(0, 2, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 3) {
-		add_new_piece(1, 0, piece);
+		if (!add_new_piece(1, 0, piece)){
+			return 1;
+		}
 	}
+	
 	if (input == 4) {
-		add_new_piece(1, 1, piece);
+		if (!add_new_piece(1, 1, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 5) {
-		add_new_piece(1, 2, piece);
+		if (!add_new_piece(1, 2, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 6) {
-		add_new_piece(2, 0, piece);
+		if (!add_new_piece(2, 0, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 7) {
-		add_new_piece(2, 1, piece);
-	
+		if (!add_new_piece(2, 1, piece)) {
+			return 1;
+		}
 	}
 
 	if (input == 8) {
-		add_new_piece(2, 2, piece);
+		if (!add_new_piece(2, 2, piece)) {
+			return 1;
+		}
 	}
 	
 	if (input == 9) {
