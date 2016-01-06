@@ -32,7 +32,7 @@ Changes for Thursday, December 31st:
     
     -Basically removed code for a single player game at this time. I have every intention of making a single player AI in the future.
     
-Changes for Friday Janruary 21st 2016:
+Changes for Friday Janruary 1st 2016:
 	-Happy new year! Thats a change ;)
 	
 		Changes for Tic Tac Toe:
@@ -41,4 +41,25 @@ Changes for Friday Janruary 21st 2016:
 		-Likely fixed a bug here or there. Nothing too specfic.
 		
 		-Work on 2 human player games continues.
+		
+Changes for Wednesday Janruary 6th 2016:
+	Changes for Tic Tac Toe:
+		-Picking up where I left off. Working on fixing bugs and ensuring proper stalemate checking.
+		
+		-Fixed bugs with CLI argument detection. Invalid arguments close the program.
+		-Player piece assignment from CLI arguments is now more uniform, improving readability
+		-Fixed the date in the changelog. Somehow entered 26th instead of 6th...
+		-Fixed stalemate detection. Works as intended, until I break it again. Hopefully that wont happen ;)
+		-Un-commented win checking. So that means players should now be able to play full games! :D
+		
+		-Further improved CLI arguments. Adding a new option, 4, which brings up help
+		-Added a proper help menu! yay!
+		-Language improvents. IE my std::cout messages have been improved across the board.
+			-These improvements add uniformity, enhance readability, etc.
+		-Added a new function in game.h/cpp to allow printing of a help board, showing piece locations.
+			-This board is not affected by user input. It is display/read only.
+		-Misc. cleanup, removal of duplicate messages, etc.
+		-The overlap detected message is now in ALL CAPS to make it more noticeable.
+			-Also added whitespace to it. Now the player cant miss it.
+		
     
