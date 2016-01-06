@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <array>
+
 class Game
 {
 	public:
@@ -14,7 +16,11 @@ class Game
 		//The easiest way I could implement stalemate 
 		//detection with my limited knowledge.
 		//Is the board completely full, thereby causing a stalemate?
-		bool isStalemate = false; 
+		bool isStalemate = false;
+		
+		//Board specific variables. 
+		static const int MAX_ROWS = 3; //Bounds for our board array
+		static const int MAX_COLS = 3;
 		
 		//Return the bounds of our board.
 		//Useful for, say, only allowing the player
@@ -26,7 +32,11 @@ class Game
 		//Return our private piece variables for public use.
 		char get_piece_x() { return pieceX; }
 		char get_piece_o() { return pieceO; } 
-	
+		
+		//Public board std::array. Used in the AI. I try to avoid modifying this
+		//directly though. It keeps things more neat.
+		std::array<std::array<char, MAX_ROWS>, MAX_COLS> board; //The board itself
+
 		//Print the board in its current state
 		void print_board();
 		
@@ -69,12 +79,7 @@ class Game
 		bool is_win_horizontal(char piece);
 		bool is_win_diagonal(char piece);
 	
-		//Board specific variables. Private to prevent accidental
-		//modifcations. But with users these days, you can
-		//never really be certain...
-		static const int MAX_ROWS = 3; //Bounds for our board array
-		static const int MAX_COLS = 3;
-		char board[MAX_ROWS][MAX_COLS]; //The board itself
+		//char board[MAX_ROWS][MAX_COLS]; //The board itself
 		
 		//These make setting up the board/player(s)/etc MUCH easier.
 		char pieceX = 'X'; //The player class assigns these variables to a local var.

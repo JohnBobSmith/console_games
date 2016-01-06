@@ -8,6 +8,7 @@
 int main(int argc, char **argv)
 {
 	srand(time(0)); //Random numbers.
+	AI ai;
 	Game game;
 	Player player;
 	Player player2; //Unused if we dont have isTwoHumanPlayer set.
@@ -115,6 +116,9 @@ int main(int argc, char **argv)
 				}
 			}
 		}
+		std::cout << "The AI can see:\n";
+		ai.print_aiboard();
+		std::cout << "You can see:\n";
 		game.print_board();
 		
 		//Whoever wins first wins first, there is no other option.
