@@ -11,6 +11,17 @@ Game::Game()
 			board[row][col] = pieceNeutral;
 		}
 	}
+	
+	//Also create our help board.
+	helpBoard[0][0] = 0;
+	helpBoard[0][1] = 1;
+	helpBoard[0][2] = 2;
+	helpBoard[1][0] = 3;
+	helpBoard[1][1] = 4;
+	helpBoard[1][2] = 5;
+	helpBoard[2][0] = 6;
+	helpBoard[2][1] = 7;
+	helpBoard[2][2] = 8;
 }
 
 Game::~Game()
@@ -28,6 +39,17 @@ void Game::print_board()
 	}
 	std::cout << "\n\n"; //To avoid odd formatting. 
 									//Call it vertical padding I guess.
+}
+
+void Game::print_help_board()
+{
+	for (int row = 0; row < MAX_ROWS; row++) { 
+		std::cout << "\n"; //Proper spacing
+		for (int col = 0; col < MAX_COLS; col++) { 
+			std::cout << helpBoard[row][col];
+		}
+	}
+	std::cout << "\n\n"; //To avoid odd formatting. 
 }
 
 bool Game::is_valid_space(int xPosition, int yPosition)
@@ -53,7 +75,7 @@ bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 		}
 	} else {
 		//Piece failed to place, therefore an overlap.
-		std::cout << "Overlap  detected...\n";
+		std::cout << "\n\n...OVERLAP DETECTED...\n\n";
 		return false;
 	}
 	return true; //Function did its job.

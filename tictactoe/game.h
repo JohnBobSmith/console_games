@@ -29,6 +29,9 @@ class Game
 	
 		//Print the board in its current state
 		void print_board();
+		
+		//Print our help board. This board does not change.
+		void print_help_board();
 	
 		//Check for an overlap, IE placing an X on top of an O.
 		//Returns false if there is an overlap. The space is invalid.
@@ -77,6 +80,10 @@ class Game
 		char pieceX = 'X'; //The player class assigns these variables to a local var.
 		char pieceO = 'O'; //for example, something like: player.set_piece(game.pieceX);
 		char pieceNeutral = '-'; //The blank or empty piece.
+		
+		//Settings for making a help board. Shows the player which number corresponds
+		//to the tile he/she wants. Below are variables for that.
+		int helpBoard[MAX_ROWS][MAX_COLS];
 };
 
 #endif

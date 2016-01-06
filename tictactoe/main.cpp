@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	if (argc < 2) {
 		std::cout << "Please enter a valid CLI argument, with NO hypens. \n";
 		std::cout << "Example: ./tictactoe 20 for two player game, random piece.\n";
-		std::cout << "Additional help will come when I'm closer to releasing game fully...\n";
+		std::cout << "Try ./tictactoe 4 for help\n";
 		return -2; //Bad CLI arg or lack of one.
 	}
 	
@@ -53,11 +53,27 @@ int main(int argc, char **argv)
 		std::cout << "Player one, your piece is " << player.playerPiece << "\n";
 		std::cout << "Player two, your piece is " << player2.playerPiece << "\n";
 		player.isTwoHumanPlayer = true;
+	} else if (strtol(argv[1], NULL, 10) == 4) {
+		std::cout << "Here is what the board looks like internally.\n";
+		game.print_help_board();
+		std::cout << "As you can see, the top left corner is 0, the middle\n";
+		std::cout << "is 4, and so on. When playing, enter the number, seen\n";
+		std::cout << "here, which corresponds to your piece. So, enter 4 to\n";
+		std::cout << "place your piece in the middle.\n\n";
+		std::cout << "Valid CLI arguments are: 20, 21, 22, and 4\n";
+		std::cout << "The first number in all of them (except 4) is 2. This determines\n";
+		std::cout << "many players you want. The second number is who gets\n";
+		std::cout << "which piece. Zero is random, one makes player 1 X, and\n";
+		std::cout << "2 makes player one O. So, ./tictactoe 20 starts a 2 player\n";
+		std::cout << "game with random pieces. Finally, 4 brings up this help menu.\n";
+		std::cout << "\nI hope this was useful! ;)\n";
+		std::cout << "Now exiting help. Have fun!\n";
+		return 0;
 	} else {
-		std::cout << "Error. Invalid CLI argument. Arguments are: 20 | 21 | 22\n";
+		std::cout << "Error. Invalid CLI argument. Arguments are: 20 | 21 | 22 | 4\n";
 		std::cout << "Please use one of the above when running the program.\n";
 		std::cout << "For example, ./tictactoe 20\n";
-		std::cout << "Now exiting so you can retry.\n";
+		std::cout << "Now exiting.\n";
 		return -2; //bad CLI arg or lack of one.
 	}
 
@@ -75,7 +91,7 @@ int main(int argc, char **argv)
 					return -1; //Error or user exit.
 				}
 				if  (game.make_move(userInput, player.playerPiece) == 1) {
-					std::cout << "Overlap detected... \n";
+					//Overlap detected...
 					std::cout << "Player 1, try again.\n";
 					player.isPlayerTurn = true;
 				} else {
@@ -90,7 +106,7 @@ int main(int argc, char **argv)
 					return -1; //Error or user exit.
 				}
 				if  (game.make_move(userInput, player2.playerPiece) == 1) {
-					std::cout << "Overlap detected... \n";
+					//Overlap detected...
 					std::cout << "Player 2, try again.\n";
 					player.isPlayerTurn = false;
 				} else {
