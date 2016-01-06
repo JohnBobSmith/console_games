@@ -1,5 +1,6 @@
 #include "game.h"
 #include "player.h"
+#include "ai.h"
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
