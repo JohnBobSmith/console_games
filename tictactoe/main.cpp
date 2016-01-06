@@ -65,32 +65,24 @@ int main(int argc, char **argv)
 				piece = player.playerPiece;
 				std::cout << "Player one, enter the number of the square you want.\n";
 				userInput = player.get_input();	
-				if (userInput == -1) {
-					std::cout << "\n\nExiting the game on grounds of user error or request.\n\n";;
-					return -1;
-				}
-				
 				if  (game.make_move(userInput, player.playerPiece) == 1) {
 					std::cout << "Overlap detected... \n";
 					std::cout << "Player 1, try again.\n";
 					player.isPlayerTurn = true;
+				} else {
+					player.isPlayerTurn = false;
 				}
-				player.isPlayerTurn = false;
 			} else {
 				piece = player2.playerPiece;
 				std::cout << "Player two, enter the number of the square you want.\n";
 				userInput = player.get_input();
-				if (userInput == -1) {
-					std::cout << "\n\nExiting the game on grounds of user error or request.\n\n";;
-					return -1;
-				}
-				
-				if  (game.make_move(userInput, player.playerPiece) == 1) {
+				if  (game.make_move(userInput, player2.playerPiece) == 1) {
 					std::cout << "Overlap detected... \n";
 					std::cout << "Player 2, try again.\n";
 					player.isPlayerTurn = false;
+				} else {
+					player.isPlayerTurn = true;
 				}
-				player.isPlayerTurn = true;
 			}
 		}
 		game.print_board();
