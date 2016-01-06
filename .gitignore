@@ -2,7 +2,7 @@
 #Also removed fortran modules and other irrelevant stuff.
 
 #Do not include my tictactoe executable. That was a mistake.
-tictactoe
+tictactoe/tictactoe
 
 # Compiled Object files
 *.slo
