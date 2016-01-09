@@ -32,10 +32,6 @@ class Game
 		//Return our private piece variables for public use.
 		char get_piece_x() { return pieceX; }
 		char get_piece_o() { return pieceO; } 
-		
-		//Public board std::array. Used in the AI. I try to avoid modifying this
-		//directly though. It keeps things more neat.
-		std::array<std::array<char, MAX_ROWS>, MAX_COLS> board; //The board itself
 
 		//Print the board in its current state
 		void print_board();
@@ -80,6 +76,7 @@ class Game
 		bool is_win_diagonal(char piece);
 	
 		//char board[MAX_ROWS][MAX_COLS]; //The board itself
+		std::array<std::array<char, MAX_ROWS>, MAX_COLS> board; //The board itself
 		
 		//These make setting up the board/player(s)/etc MUCH easier.
 		char pieceX = 'X'; //The player class assigns these variables to a local var.
