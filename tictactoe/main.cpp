@@ -116,9 +116,6 @@ int main(int argc, char **argv)
 				}
 			}
 		}
-		std::cout << "The AI can see:\n";
-		ai.print_aiboard();
-		std::cout << "You can see:\n";
 		game.print_board();
 		
 		//Whoever wins first wins first, there is no other option.

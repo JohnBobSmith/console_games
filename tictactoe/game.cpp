@@ -1,6 +1,5 @@
 #include "game.h"
 #include "player.h"
-#include "ai.h"
 #include <iostream>
 #include <cstdlib>
 
@@ -63,14 +62,12 @@ bool Game::is_valid_space(int xPosition, int yPosition)
 
 bool Game::add_new_piece(int xPosition, int yPosition, char piece)
 {
-	AI ai; //for adding to the AI board.
 	//Finally proper stalemate detection if this goes well.
 	//Keep track of our open tiles
 	static int openTiles = 9;
 	
 	if (is_valid_space(xPosition, yPosition)) {
 		board[xPosition][yPosition] = piece; //All clear, place piece
-		ai.update_board(xPosition, yPosition, piece);
 		//We placed a piece, therefore we have 1 less spot open.
 		openTiles -= 1;
 		if (openTiles <= 0) { //If we have no spots open...
@@ -103,7 +100,7 @@ int Game::get_random_num(int bound)
 int Game::make_move(int input, char piece)
 {
 	if (input == -1) {
-		return -1;
+		return -1; //Generic exit
 	}
 
 	if (input == 0) {
