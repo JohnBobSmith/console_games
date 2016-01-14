@@ -1,3 +1,5 @@
+IMPORTANT: NO LONGER WORKING ON THIS UNTIL FURTHER NOTICE. SORRY :(
+
 # Console Games
 Repo for storing all of my command line games, including Tic Tac Toe currently. This repository will contain "production" code if you will. Which is mostly some products (games) that I will probably maintain for some time. These projects will be written in C++, with the possibility of Lua not ruled out. Everything will be 110% free in every sense of the world. Which is why I use the MIT License. Enjoy!
 
