@@ -1,5 +1,3 @@
-IMPORTANT: NO LONGER WORKING ON THIS PROJECT. SORRY :(
-
 ### A GLOBAL CHANGELOG FILE
 THIS IS NOW A MUST BECAUSE I AM STARTING TO MAKE MASSIVE CHAGNES
 CHANGELOG FORMAT WILL BE: <date> <enter, tab> <subproject> <enter, tab> <hypehn> CHANGES
@@ -63,5 +61,7 @@ Changes for Wednesday Janruary 6th 2016:
 		-Misc. cleanup, removal of duplicate messages, etc.
 		-The overlap detected message is now in ALL CAPS to make it more noticeable.
 			-Also added whitespace to it. Now the player cant miss it.
-		
+
+Changes for Janruary 17 2016
+	-Work has resumed on this project.
     
